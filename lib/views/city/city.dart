@@ -24,13 +24,27 @@ class _CityState extends State<City> {
         ],
       ),
       body: Container(
-        padding: const EdgeInsets.all(10),
         child: Column(
-          children: widget.activities
-              .map(
-                (activity) => ActivityCard(activity: activity),
-              )
-              .toList(),
+          children: <Widget>[
+            Container(
+              height: 150,
+              color: Colors.white,
+            ),
+            Expanded(
+              child: GridView.count(
+                mainAxisSpacing: 3,
+                crossAxisSpacing: 3,
+                crossAxisCount: 2,
+                children: widget.activities
+                    .map(
+                      (activity) => ActivityCard(
+                        activity: activity,
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
+          ],
         ),
       ),
     );

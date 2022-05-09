@@ -7,6 +7,13 @@ class ActivityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(activity.image);
+    return SizedBox(
+      width: double.infinity,
+      height: 150,
+      child: Image.asset(
+        activity.image,
+        fit: BoxFit.cover,
+      ),
+    );
   }
 }
