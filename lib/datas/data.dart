@@ -17,6 +17,7 @@ List<Activity> activities = [
       name: 'Notre Dame',
       id: 'a3',
       city: 'Paris'),
+      s
   Activity(
       image: 'assets/images/defense.jpg',
       name: 'La Défense',
