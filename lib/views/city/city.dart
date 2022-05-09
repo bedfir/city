@@ -34,6 +34,10 @@ class _CityState extends State<City> {
     });
   }
 
+  double get amount {
+    return 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,14 +58,14 @@ class _CityState extends State<City> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
+                  const Text(
                     'Paris',
                     style: TextStyle(
                       fontSize: 25,
                       decoration: TextDecoration.underline,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   Row(
@@ -69,11 +73,36 @@ class _CityState extends State<City> {
                       Expanded(
                         child: Text(
                           DateFormat("d/M/y").format(mytrip.date),
+                          style: const TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                       ElevatedButton(
-                        child: Text('Selectioner une date'),
+                        child: const Text('Selectioner une date'),
                         onPressed: setDate,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      const Expanded(
+                        child: Text(
+                          'Montant / personne',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        '$amount €',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
