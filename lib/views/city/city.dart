@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
 import 'package:material/models/activity.model.dart';
 import 'package:material/datas/data.dart' as data;
 import 'package:material/models/trip.model.dart';
-import 'package:material/views/city/widgets/activity_card.dart';
+import 'package:material/views/city/widgets/trip_overview.dart';
+import '../../views/city/widgets/activity_card.dart';
 
 class City extends StatefulWidget {
   City({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class _CityState extends State<City> {
     showDatePicker(
       context: context,
       initialDate: DateTime.now().add(
-        Duration(days: 1),
+        const Duration(days: 1),
       ),
       firstDate: DateTime.now(),
       lastDate: DateTime(2023),
@@ -32,10 +33,6 @@ class _CityState extends State<City> {
         });
       }
     });
-  }
-
-  double get amount {
-    return 0;
   }
 
   @override
@@ -51,64 +48,7 @@ class _CityState extends State<City> {
       body: Container(
         child: Column(
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(10),
-              height: 200,
-              color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  const Text(
-                    'Paris',
-                    style: TextStyle(
-                      fontSize: 25,
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          DateFormat("d/M/y").format(mytrip.date),
-                          style: const TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                      ElevatedButton(
-                        child: const Text('Selectioner une date'),
-                        onPressed: setDate,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      const Expanded(
-                        child: Text(
-                          'Montant / personne',
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        '$amount €',
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            TripOverview(setDate: setDate, trip: mytrip),
             Expanded(
               child: GridView.count(
                 mainAxisSpacing: 3,
