@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import './widgets/trip_activity_list.dart';
 import './widgets/activity_list.dart';
 import './widgets/trip_overview.dart';
 
@@ -18,8 +19,8 @@ class City extends StatefulWidget {
 }
 
 class _CityState extends State<City> {
-  Trip mytrip = Trip(city: 'Paris', activities: [], date: DateTime.now());
-  int index = 0;
+  late Trip mytrip = Trip(city: 'Paris', activities: [], date: DateTime.now());
+  late int index = 0;
 
   void setDate() {
     showDatePicker(
@@ -40,6 +41,12 @@ class _CityState extends State<City> {
     );
   }
 
+  void switchIndex(newIndex) {
+    setState(() {
+      index = newIndex;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,12 +62,15 @@ class _CityState extends State<City> {
           children: <Widget>[
             TripOverview(setDate: setDate, trip: mytrip),
             Expanded(
-              child: ActivityList(activities: widget.activities),
+              child: index == 0
+                  ? ActivityList(activities: widget.activities)
+                  : TripActivityList(),
             ),
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: index,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.map),
@@ -71,6 +81,7 @@ class _CityState extends State<City> {
             label: 'Mes activitées',
           ),
         ],
+        onTap: switchIndex,
       ),
     );
   }
