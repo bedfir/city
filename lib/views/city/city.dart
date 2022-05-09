@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:material/models/activity.model.dart';
 import 'package:material/datas/data.dart' as data;
 import 'package:material/models/trip.model.dart';
@@ -16,12 +17,29 @@ class City extends StatefulWidget {
 class _CityState extends State<City> {
   Trip mytrip = Trip(city: 'Paris', activities: [], date: DateTime.now());
 
+  void setDate() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now().add(
+        Duration(days: 1),
+      ),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2023),
+    ).then((newDate) {
+      if (newDate != null) {
+        setState(() {
+          mytrip.date = newDate;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: const Icon(Icons.chevron_left),
-        title: const Text('Paris'),
+        title: const Text('Organisation voyage'),
         actions: const <Widget>[
           Icon(Icons.more_vert),
         ],
@@ -34,13 +52,28 @@ class _CityState extends State<City> {
               height: 200,
               color: Colors.white,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  Text(
+                    'Paris',
+                    style: TextStyle(
+                      fontSize: 25,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
                   Row(
                     children: <Widget>[
-                      Text('Choisissez une date'),
+                      Expanded(
+                        child: Text(
+                          DateFormat("d/M/y").format(mytrip.date),
+                        ),
+                      ),
                       ElevatedButton(
                         child: Text('Selectioner une date'),
-                        onPressed: () {},
+                        onPressed: setDate,
                       ),
                     ],
                   ),
