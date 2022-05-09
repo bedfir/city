@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material/models/activity.model.dart';
 import 'package:material/datas/data.dart' as data;
+import 'package:material/models/trip.model.dart';
 import 'package:material/views/city/widgets/activity_card.dart';
 
 class City extends StatefulWidget {
@@ -13,6 +14,8 @@ class City extends StatefulWidget {
 }
 
 class _CityState extends State<City> {
+  Trip mytrip = Trip(city: 'Paris', activities: [], date: DateTime.now());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,8 +30,22 @@ class _CityState extends State<City> {
         child: Column(
           children: <Widget>[
             Container(
-              height: 150,
+              padding: EdgeInsets.all(10),
+              height: 200,
               color: Colors.white,
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Text('Choisissez une date'),
+                      ElevatedButton(
+                        child: Text('Selectioner une date'),
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
             Expanded(
               child: GridView.count(
