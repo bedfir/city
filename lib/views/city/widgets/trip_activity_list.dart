@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material/views/city/widgets/trip_activity.card.dart';
 import '../../../models/activity.model.dart';
 
 class TripActivityList extends StatelessWidget {
@@ -13,27 +14,17 @@ class TripActivityList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        var activity = activities[index];
-        return Card(
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundImage: AssetImage(activity.image),
-            ),
-            title: Text(activity.name),
-            subtitle: Text(activity.city),
-            trailing: IconButton(
-              icon: Icon(Icons.delete),
-              color: Colors.red,
-              onPressed: () {
-                deleteTripActivity(activity.id);
-              },
-            ),
-          ),
-        );
-      },
-      itemCount: activities.length,
+    return Container(
+      child: ListView(
+        children: activities
+            .map(
+              (activity) => TripActivityCard(
+                  key: ValueKey(activity.id),
+                  activity: activity,
+                  deleteTripActivity: deleteTripActivity),
+            )
+            .toList(),
+      ),
     );
   }
 }
