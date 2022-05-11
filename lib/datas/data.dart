@@ -1,5 +1,5 @@
 // import 'package:my_travel/models/activity.model.dart';
-import 'package:material/models/activity.model.dart';
+import 'package:material/models/activity_model.dart';
 
 List<Activity> activities = [
   Activity(

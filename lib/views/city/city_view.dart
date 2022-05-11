@@ -4,13 +4,13 @@ import './widgets/trip_activity_list.dart';
 import './widgets/activity_list.dart';
 import './widgets/trip_overview.dart';
 
-import '../../models/activity.model.dart';
-import '../../models/trip.model.dart';
+import '../../models/activity_model.dart';
+import '../../models/trip_model.dart';
 
 import '../../datas/data.dart' as data;
 
-class City extends StatefulWidget {
-  City({Key? key}) : super(key: key);
+class CityView extends StatefulWidget {
+  CityView({Key? key}) : super(key: key);
 
   final List<Activity> activities = data.activities;
 
@@ -30,16 +30,17 @@ class City extends StatefulWidget {
   }
 
   @override
-  State<City> createState() => _CityState();
+  State<CityView> createState() => _CityViewState();
 }
 
-class _CityState extends State<City> {
+class _CityViewState extends State<CityView> with WidgetsBindingObserver {
   late Trip mytrip;
   late int index;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance?.addObserver(this);
     index = 0;
     mytrip = Trip(city: 'Paris', activities: [], date: null);
   }
@@ -49,6 +50,18 @@ class _CityState extends State<City> {
     return widget.activities
         .where((activity) => mytrip.activities.contains(activity.id))
         .toList();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print(state);
+    super.didChangeAppLifecycleState(state);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance?.removeObserver(this);
   }
 
   /// setDate Function implement a showDatePicker.

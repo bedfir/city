@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:material/views/city/city.dart';
+import 'package:material/views/city/city_view.dart';
 
 void main() {
   // Define a test. The TestWidgets function also provides a WidgetTester
@@ -16,6 +16,6 @@ void main() {
   // with widgets in the test environment.
   testWidgets('MyWidget has a title and message', (WidgetTester tester) async {
     // Create the widget by telling the tester to build it.
-    await tester.pumpWidget(MaterialApp(home: City()));
+    await tester.pumpWidget(MaterialApp(home: CityView()));
   });
 }
