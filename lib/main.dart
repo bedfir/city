@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:material/views/city/city.dart';
-import 'package:material/views/home/home.dart';
+import 'package:material/views/city/city_view.dart';
+import 'package:material/views/home/home_view.dart';
 
 void main(List<String> args) {
   runApp(const DymaTrip());
@@ -15,7 +15,7 @@ class DymaTrip extends StatelessWidget {
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
           titleTextStyle: TextStyle(
-            fontSize: 30,
+            fontSize: 25,
           ),
         ),
         primarySwatch: Colors.red,
@@ -26,8 +26,8 @@ class DymaTrip extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      // home: Home(),
-      home: City(),
+      home: HomeView(),
+      // home: CityView(),
     );
   }
 }
