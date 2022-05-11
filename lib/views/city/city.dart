@@ -29,12 +29,16 @@ class _CityState extends State<City> {
     mytrip = Trip(city: 'Paris', activities: [], date: null);
   }
 
+  /// Getter the object selected in mytrip activities by id
   List<Activity> get tripActivities {
     return widget.activities
         .where((activity) => mytrip.activities.contains(activity.id))
         .toList();
   }
 
+  /// setDate Function implement a showDatePicker.
+  ///
+  /// Then the new date is selected assigne it to mytrip.date
   void setDate() {
     showDatePicker(
       context: context,
@@ -54,12 +58,18 @@ class _CityState extends State<City> {
     );
   }
 
+  /// switchIndex Function Set the index to bottomNavigationBar
+  /// and rebuild
   void switchIndex(newIndex) {
     setState(() {
       index = newIndex;
     });
   }
 
+  /// toggleActivity Funciton take a [String] parametre `id`
+  ///
+  /// Checked if the id exist in the mytrip.actitivies and toggle
+  /// add/remove
   void toggleActivity(String id) {
     setState(() {
       mytrip.activities.contains(id)
