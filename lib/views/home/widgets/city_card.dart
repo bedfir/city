@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
 
-class CityCard extends StatelessWidget {
-  final String name;
-  final String image;
-  final bool checked;
-  final VoidCallback updateChecked;
+import '../../../models/city_model.dart';
 
-  const CityCard({
-    Key? key,
-    required this.name,
-    required this.image,
-    required this.checked,
-    required this.updateChecked,
-  }) : super(key: key);
+class CityCard extends StatelessWidget {
+  final City city;
+
+  const CityCard({Key? key, required this.city}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,42 +18,29 @@ class CityCard extends StatelessWidget {
           children: <Widget>[
             Ink.image(
               fit: BoxFit.cover,
-              image: AssetImage(image),
+              image: AssetImage(city.image),
               child: InkWell(
-                onTap: updateChecked,
+                onTap: () {},
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Icon(
-                          checked ? Icons.star : Icons.star_border,
-                          color: Colors.white,
-                          size: 40,
-                        ),
-                      ],
-                    ),
+            Positioned(
+              top: 10,
+              left: 10,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 5,
+                ),
+                color: Colors.black45,
+                child: Text(
+                  city.name,
+                  style: const TextStyle(
+                    fontSize: 35,
+                    color: Colors.white,
                   ),
-                  Row(
-                    children: <Widget>[
-                      Text(
-                        name,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                ),
               ),
-            ),
+            )
           ],
         ),
       ),
