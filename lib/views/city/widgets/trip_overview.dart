@@ -31,6 +31,7 @@ class TripOverview extends StatelessWidget {
             style: TextStyle(
               fontSize: 25,
               decoration: TextDecoration.underline,
+              fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(
@@ -40,9 +41,11 @@ class TripOverview extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: Text(
-                  DateFormat("d/M/y").format(trip.date),
+                  trip.date != null
+                      ? DateFormat("d/M/y").format(trip.date as DateTime)
+                      : 'Choisissez une Date',
                   style: const TextStyle(
-                    fontSize: 20,
+                    fontSize: 14.5,
                   ),
                 ),
               ),
@@ -61,14 +64,14 @@ class TripOverview extends StatelessWidget {
                 child: Text(
                   'Montant / personne',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 14.5,
                   ),
                 ),
               ),
               Text(
                 '$amount €',
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 14.5,
                   fontWeight: FontWeight.bold,
                 ),
               ),
