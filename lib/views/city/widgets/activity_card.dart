@@ -47,11 +47,13 @@ class ActivityCard extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Flexible(
-                      child: Text(
-                        activity.name,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
+                      child: FittedBox(
+                        child: Text(
+                          activity.name,
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
