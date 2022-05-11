@@ -19,8 +19,15 @@ class City extends StatefulWidget {
 }
 
 class _CityState extends State<City> {
-  late Trip mytrip = Trip(city: 'Paris', activities: [], date: DateTime.now());
-  late int index = 0;
+  late Trip mytrip;
+  late int index;
+
+  @override
+  void initState() {
+    super.initState();
+    index = 0;
+    mytrip = Trip(city: 'Paris', activities: [], date: null);
+  }
 
   void setDate() {
     showDatePicker(
