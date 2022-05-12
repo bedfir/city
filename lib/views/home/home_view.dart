@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:material/views/home/widgets/city_card.dart';
+import 'package:material/widgets/ask_modal.dart';
 
 import '../../models/city_model.dart';
 
 class HomeView extends StatefulWidget {
+  static String routeName = '/';
   const HomeView({Key? key}) : super(key: key);
 
   @override
@@ -17,8 +19,18 @@ class _HomeViewState extends State<HomeView> {
     City(name: 'Paris', image: 'assets/images/tourEiffel.jpg'),
     City(name: 'Rennes', image: 'assets/images/rennes.jpg'),
     City(name: 'Monastir', image: 'assets/images/monastir.jpg'),
-    City(name: 'Valladolid', image: 'assets/images/valladolid.jpg')
+    // City(name: 'Valladolid', image: 'assets/images/valladolid.jpg')
   ];
+
+  openModal(context) {
+    askModal(
+      context,
+      'Hello veux tu quelques chose',
+    )!
+        .then((String result) {
+      print(result);
+    });
+  }
 
 /*   void switchChecked(city) {
     int index = cities.indexOf(city);
@@ -40,9 +52,17 @@ class _HomeViewState extends State<HomeView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            ...cities.map((city) {
-              return CityCard(city: city);
-            })
+            ...cities.map(
+              (city) {
+                return CityCard(city: city);
+              },
+            ),
+            ElevatedButton(
+              onPressed: () {
+                openModal(context);
+              },
+              child: const Text('modal'),
+            ),
           ],
         ),
       ),
