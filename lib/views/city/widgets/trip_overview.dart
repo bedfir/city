@@ -6,15 +6,15 @@ import '../../../models/trip_model.dart';
 class TripOverview extends StatelessWidget {
   final VoidCallback setDate;
   final Trip trip;
-
-  double get amount {
-    return 0;
-  }
+  final String cityName;
+  final double amount;
 
   const TripOverview({
     Key? key,
     required this.setDate,
     required this.trip,
+    required this.cityName,
+    required this.amount,
   }) : super(key: key);
 
   @override
@@ -31,9 +31,9 @@ class TripOverview extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const Text(
-            'Paris',
-            style: TextStyle(
+          Text(
+            cityName,
+            style: const TextStyle(
               fontSize: 25,
               decoration: TextDecoration.underline,
               fontWeight: FontWeight.bold,
