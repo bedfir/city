@@ -4,15 +4,17 @@ import './widgets/trip_activity_list.dart';
 import './widgets/activity_list.dart';
 import './widgets/trip_overview.dart';
 
+import '../../models/city_model.dart';
 import '../../models/activity_model.dart';
 import '../../models/trip_model.dart';
 
 import '../../datas/data.dart' as data;
 
 class CityView extends StatefulWidget {
-  CityView({Key? key}) : super(key: key);
-
+  static String routeName = '/city';
   final List<Activity> activities = data.activities;
+  final City city;
+  CityView({Key? key, required this.city}) : super(key: key);
 
   showContext({
     required BuildContext context,
@@ -43,6 +45,14 @@ class _CityViewState extends State<CityView> with WidgetsBindingObserver {
     WidgetsBinding.instance?.addObserver(this);
     index = 0;
     mytrip = Trip(city: 'Paris', activities: [], date: null);
+  }
+
+  double get amount {
+    return mytrip.activities.fold(0.0, (previousValue, element) {
+      var activity =
+          widget.activities.firstWhere((activity) => activity.id == element);
+      return previousValue + activity.price;
+    });
   }
 
   /// Getter the object selected in mytrip activities by id
@@ -117,7 +127,12 @@ class _CityViewState extends State<CityView> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.chevron_left),
+        leading: IconButton(
+          icon: const Icon(Icons.chevron_left),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: const Text('Organisation voyage'),
         actions: const <Widget>[
           Icon(Icons.more_vert),
@@ -127,7 +142,12 @@ class _CityViewState extends State<CityView> with WidgetsBindingObserver {
         child: widget.showContext(
           context: context,
           children: <Widget>[
-            TripOverview(setDate: setDate, trip: mytrip),
+            TripOverview(
+              setDate: setDate,
+              trip: mytrip,
+              cityName: widget.city.name,
+              amount: amount,
+            ),
             Expanded(
               child: index == 0
                   ? ActivityList(
