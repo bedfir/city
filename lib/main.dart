@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:material/views/404/not_found.dart';
 import 'package:material/views/city/city_view.dart';
 import 'package:material/views/home/home_view.dart';
+
+import 'models/city_model.dart';
 
 void main(List<String> args) {
   runApp(const DymaTrip());
@@ -26,7 +29,26 @@ class DymaTrip extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: HomeView(),
+      // home: HomeView(),
+      // initialRoute: '/city',
+      routes: {
+        '/': (context) {
+          return HomeView();
+        },
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == CityView.routeName) {
+          final City city = settings.arguments as City;
+          return MaterialPageRoute(builder: (context) {
+            return CityView(city: city);
+          });
+        }
+      },
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(builder: (context) {
+          return NotFound();
+        });
+      },
       // home: CityView(),
     );
   }
